@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono&display=swap');
+
+:root {
+  --main-color: #8A84E2;
+  --main-bg-color: #000;
+  --light-bg-color: #222;
+  --textarea-border: #999;
+  --textarea-bg: #111;
+  --textarea-color: #eee;
+  --textarea-color-focus: #E1DFFF;
+
+  --button-bg-color: var(--main-color);
+  --button-color: #000;
+  --button-bg-color-hover: #000;
+  --button-color-hover: var(--main-color);
+  --button-bg-color-disabled: #555;
+  --button-color-disabled: #eee;
+
+  --scrollbar-track-color: var(--main-color);
+  --scrollbar-thumb-color: #111;
+
+  --scrollbar-track-color-blur: #999;
+  --scrollbar-thumb-color-blur: #111;
+}
+
+html,
+body {
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
+  font-family: 'Urbanist';
+  font-weight: bold;
+}
+
+html {
+  padding: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--light-bg-color);
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+textarea {
+  background-color: var(--textarea-bg);
+  border: 3px solid var(--textarea-border);
+  color: var(--textarea-color);
+  font-family: 'Martian Mono';
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100%;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+textarea:focus {
+  color: var(--textarea-color-focus);
+  border-color: var(--main-color);
+  outline: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: var(--button-bg-color);
+  color: var(--button-color);
+  padding: 20px;
+  font-family: 'Urbanist';
+  font-weight: bold;
+  font-size: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--button-bg-color-hover);
+  color: var(--button-color-hover);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: var(--button-bg-color-disabled);
+  color: var(--button-color-disabled);
+}
+
+label {
+  font-size: 18px;
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color-blur);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color-blur);
+  border-left: 3px solid var(--scrollbar-track-color-blur);
+}
+
+*:focus::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+}
+
+*:focus::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-left: 3px solid var(--scrollbar-track-color);
+}

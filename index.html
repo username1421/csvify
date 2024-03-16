@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>CSVify</title>
+</head>
+<body>
+  <div class="input-area area">
+    <label for="input-json">Input (JSON)</label>
+    <textarea name="input-json" id="input-json" cols="30" rows="10">{
+  "records": [
+    {
+      "name": "bob",
+      "age": 42,
+      "profilePicURL": "https://i.pravatar.cc/256",
+      "employed": true,
+      "salary": 142819
+    },
+    {
+      "name": "dave",
+      "age": 11,
+      "profilePicURL": "https://i.pravatar.cc/300",
+      "employed": false
+    },
+    {
+      "name": "john",
+      "age": "unknown",
+      "profilePicURL": "https://i.pravatar.cc/256"
+    }
+  ]
+}</textarea>
+    <label for="input-migration">Input data transformer (function body)</label>
+    <textarea name="input-migration" id="input-migration" cols="30" rows="10" placeholder="return data.markers;">data.records.push({
+  name: 'mike',
+  age: 32,
+  employed: false
+});
+
+return data.records;</textarea>
+    <button id="button-run" onclick="run()">Run</button>
+  </div>
+  <div class="output-area area">
+    <label for="output-json">Output (JSON, readonly)</label>
+    <textarea name="output-json" id="output-json" cols="30" rows="10" readonly>{}</textarea>
+    <label for="output-csv">Output (CSV, readonly)</label>
+    <textarea name="output-csv" id="output-csv" cols="30" rows="10" readonly></textarea>
+    <button id="button-download" onclick="download()" disabled>Download CSV</button>
+  </div>
+</body>
+</html>
