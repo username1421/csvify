@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jtc.js" type="module"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>CSVify: JSON to CSV</title>
+</head>
+
+<body>
+  <div class="splash">
+    <div class="loader">LOADING</div>
+  </div>
+
+  <a class="mode-switch" href="ctj.html" role="button">Switch mode</a>
+  
+  <div class="input-area area">
+    <label for="input-json">Input (JSON)</label>
+    <textarea name="input-json" id="input-json" cols="30" rows="10">{
+  "records": [
+    {
+      "name": "bob",
+      "age": 42,
+      "profilePicURL": "https://i.pravatar.cc/256",
+      "employed": true,
+      "salary": 142819
+    },
+    {
+      "name": "dave",
+      "age": 11,
+      "profilePicURL": "https://i.pravatar.cc/300",
+      "employed": false
+    },
+    {
+      "name": "john",
+      "age": "unknown",
+      "profilePicURL": "https://i.pravatar.cc/256"
+    }
+  ]
+}</textarea>
+    <label for="input-transformer">JSON transformer body (JS code)</label>
+    <textarea name="input-transformer" id="input-transformer" cols="30" rows="10" placeholder="return data.markers;">data.records.push({
+  name: 'mike',
+  age: 32,
+  employed: false
+});
+
+return data.records;</textarea>
+    <button id="button-transform">Transform JSON and convert to CSV</button>
+  </div>
+  <div class="output-area area">
+    <label for="output-json">JSON after transformation (readonly)</label>
+    <textarea name="output-json" id="output-json" cols="30" rows="10" readonly>{}</textarea>
+    <label for="output-csv">CSV (readonly)</label>
+    <textarea name="output-csv" id="output-csv" cols="30" rows="10" readonly></textarea>
+    <button id="button-download" disabled>Download as CSV-file</button>
+  </div>
+</body>
+
+</html>

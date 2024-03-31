@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.prompt {
+  font-size: 48px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
