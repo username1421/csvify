@@ -81,7 +81,7 @@ function transform() {
     return transformerResult;
   }
 
-  state.jsonStr = JSON.stringify(transformerResult.payload);
+  state.jsonStr = JSON.stringify(transformerResult.payload).toWellFormed();
   trySetJsonOutput();
 }
 
@@ -90,7 +90,7 @@ function download() {
     return;
   }
 
-  downloadBlob(new Blob([state.jsonStr], { type: "text/json" }), 'data.json');
+  downloadBlob(new Blob([state.jsonStr], { type: "application/json" }), 'data.json');
 }
 
 if (init(nodes).ok) {
