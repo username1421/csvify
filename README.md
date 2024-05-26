@@ -1,2 +1,3 @@
 # csvify
-CSVify your JSON
+
+CSVify your JSON and JSONify your CSV

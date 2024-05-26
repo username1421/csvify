@@ -10,7 +10,44 @@ body {
 }
 
 .links {
+  gap: var(--pad-1);
+
   display: flex;
   flex-direction: row;
-  gap: 20px;
+}
+
+.links a {
+  padding: var(--pad-0);
+  gap: var(--pad-0);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.links a .icon {
+  background-color: var(--color-btn-fg);
+  color: var(--color-btn-bg);
+
+  width: 250px;
+  height: 250px;
+  border-radius: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Martian Mono";
+  font-size: 24px;
+}
+
+.links a:hover .icon {
+  background-color: var(--color-btn-fg-hover);
+  color: var(--color-btn-bg-hover);
+}
+
+.links a:active .icon {
+  background-color: var(--color-btn-fg-active);
+  color: var(--color-btn-bg-active);
 }

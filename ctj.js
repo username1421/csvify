@@ -1,38 +1,45 @@
-import { downloadBlob, hideSplash, init, switchMode, toArray, tryBase } from "./utils.js";
+import {
+  downloadBlob,
+  hideSplash,
+  init,
+  transitionRedirect,
+  toArray,
+  tryBase,
+} from "./utils.js";
 
 const nodes = {
   inputCsv: {
-    selector: '#input-csv',
-    node: undefined
+    selector: "#input-csv",
+    node: undefined,
   },
   inputTransformer: {
-    selector: '#input-transformer',
-    node: undefined
+    selector: "#input-transformer",
+    node: undefined,
   },
   outputArray: {
-    selector: '#output-array',
-    node: undefined
+    selector: "#output-array",
+    node: undefined,
   },
   outputJson: {
-    selector: '#output-json',
-    node: undefined
+    selector: "#output-json",
+    node: undefined,
   },
   buttonTransform: {
-    selector: '#button-transform',
-    node: undefined
+    selector: "#button-transform",
+    node: undefined,
   },
   buttonDownload: {
-    selector: '#button-download',
-    node: undefined
+    selector: "#button-download",
+    node: undefined,
   },
   modeSwitch: {
-    selector: '.mode-switch',
-    node: undefined
-  }
+    selector: ".mode-switch",
+    node: undefined,
+  },
 };
 
 const state = {
-  jsonStr: ""
+  jsonStr: "",
 };
 
 function tryParseInputCsv() {
@@ -41,7 +48,7 @@ function tryParseInputCsv() {
     const array = toArray(rawCsv);
 
     nodes.outputArray.node.value = JSON.stringify(array);
-    
+
     return array;
   });
 }
@@ -54,8 +61,8 @@ function tryExecuteTransformer() {
       return;
     }
 
-    const transformerBody = nodes.inputTransformer.node.value;
-    const transformerFunction = new Function('data', transformerBody);
+    const transformerFunctionBody = nodes.inputTransformer.node.value;
+    const transformerFunction = new Function("data", transformerFunctionBody);
 
     return transformerFunction(csvParseResult.payload);
   };
@@ -64,7 +71,7 @@ function tryExecuteTransformer() {
     return callbackResult;
   };
 
-  return tryBase(callback, check, 'Unable to parse JSON data');
+  return tryBase(callback, check, "Unable to parse JSON data");
 }
 
 function trySetJsonOutput() {
@@ -90,13 +97,16 @@ function download() {
     return;
   }
 
-  downloadBlob(new Blob([state.jsonStr], { type: "application/json" }), 'data.json');
+  downloadBlob(
+    new Blob([state.jsonStr], { type: "application/json" }),
+    "data.json"
+  );
 }
 
 if (init(nodes).ok) {
   nodes.buttonTransform.node.onclick = transform;
   nodes.buttonDownload.node.onclick = download;
-  nodes.modeSwitch.node.onclick = switchMode;
+  nodes.modeSwitch.node.onclick = transitionRedirect;
 
   setTimeout(hideSplash, 100);
 }
