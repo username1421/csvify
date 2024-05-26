@@ -13,7 +13,7 @@ html {
   --color-9: hsl(from var(--color-main) calc(h - 40) calc(s - 0.25) 0);
 }
 
-html[data-theme-tone="peach"] {
+html[data-theme-tone="default"] {
   --color-main: hsl(300, 50%, 50%);
 }
 
@@ -23,6 +23,10 @@ html[data-theme-tone="peach"] {
 
 html[data-theme-tone="plum"] {
   --color-main: hsl(240, 50%, 50%);
+}
+
+html[data-theme-tone="ocean"] {
+  --color-main: hsl(190, 50%, 50%);
 }
 
 html[data-theme-mapping="dark"] {

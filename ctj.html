@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme-tone="peach" data-theme-mapping="dark">
+<html lang="en" data-theme-tone="default" data-theme-mapping="light">
 
 <head>
   <meta charset="UTF-8">
@@ -62,7 +62,13 @@ john,unknown,https://i.pravatar.cc/256,,</textarea>
       </button>
     </div>
     <textarea name="input-transformer" id="input-transformer" cols="30" rows="10"
-      placeholder="return data.markers;"></textarea>
+      placeholder="return data.markers;">data.push({
+  name: 'mike',
+  age: 32,
+  employed: false
+});
+
+return { data };</textarea>
     <button id="button-transform">Convert CSV to array and transform it</button>
   </div>
   <div class="output-area area">
