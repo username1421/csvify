@@ -1,38 +1,45 @@
-import { downloadBlob, hideSplash, init, switchMode, toCSV, tryBase } from "./utils.js";
+import {
+  downloadBlob,
+  hideSplash,
+  init,
+  transitionRedirect,
+  toCSV,
+  tryBase,
+} from "./utils.js";
 
 const nodes = {
   inputJson: {
-    selector: '#input-json',
-    node: undefined
+    selector: "#input-json",
+    node: undefined,
   },
   inputTransformer: {
-    selector: '#input-transformer',
-    node: undefined
+    selector: "#input-transformer",
+    node: undefined,
   },
   outputJson: {
-    selector: '#output-json',
-    node: undefined
+    selector: "#output-json",
+    node: undefined,
   },
   outputCsv: {
-    selector: '#output-csv',
-    node: undefined
+    selector: "#output-csv",
+    node: undefined,
   },
   buttonTransform: {
-    selector: '#button-transform',
-    node: undefined
+    selector: "#button-transform",
+    node: undefined,
   },
   buttonDownload: {
-    selector: '#button-download',
-    node: undefined
+    selector: "#button-download",
+    node: undefined,
   },
   modeSwitch: {
-    selector: '.mode-switch',
-    node: undefined
-  }
+    selector: ".mode-switch",
+    node: undefined,
+  },
 };
 
 const state = {
-  csv: ""
+  csv: "",
 };
 
 function tryParseInputJson() {
@@ -50,8 +57,8 @@ function tryExecuteTransformer() {
       return;
     }
 
-    const transformerBody = nodes.inputTransformer.node.value;
-    const transformerFunction = new Function('data', transformerBody);
+    const transformerFunctionBody = nodes.inputTransformer.node.value;
+    const transformerFunction = new Function("data", transformerFunctionBody);
 
     return transformerFunction(jsonParseResult.payload);
   };
@@ -60,7 +67,7 @@ function tryExecuteTransformer() {
     return callbackResult;
   };
 
-  return tryBase(callback, check, 'Unable to parse JSON data');
+  return tryBase(callback, check, "Unable to parse JSON data");
 }
 
 function trySetJsonOutput(rawValue) {
@@ -96,13 +103,13 @@ function download() {
     return;
   }
 
-  downloadBlob(new Blob([state.csv], { type: "text/csv" }), 'data.csv');
+  downloadBlob(new Blob([state.csv], { type: "text/csv" }), "data.csv");
 }
 
 if (init(nodes).ok) {
   nodes.buttonTransform.node.onclick = transform;
   nodes.buttonDownload.node.onclick = download;
-  nodes.modeSwitch.node.onclick = switchMode;
+  nodes.modeSwitch.node.onclick = transitionRedirect;
 
   setTimeout(hideSplash, 100);
 }

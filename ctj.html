@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme-tone="peach" data-theme-mapping="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="ctj.js" type="module"></script>
+  <script src="./presets/ctjPresets.js" type="module"></script>
+  <script src="./presets/presetsManager.js" type="module"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
   <link rel="shortcut icon" href="favicon.png" type="image/png">
   <title>CSVify: CSV to JSON</title>
 </head>
@@ -13,6 +16,23 @@
 <body>
   <div class="splash">
     <div class="loader">LOADING</div>
+  </div>
+
+  <div class="modal closed">
+    <button class="close">
+      <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_11_5)">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.51509 6.07071C4.55414 6.03166 4.55414 5.96834 4.51509 5.92929L1.00001 2.41421C0.60949 2.02369 0.60949 1.39052 1.00001 1V1C1.39054 0.609476 2.0237 0.609475 2.41423 0.999999L5.9293 4.51508C5.96836 4.55413 6.03167 4.55413 6.07072 4.51508L9.5858 1C9.97633 0.609476 10.6095 0.609476 11 1V1C11.3905 1.39052 11.3905 2.02369 11 2.41421L7.48494 5.92929C7.44589 5.96834 7.44589 6.03166 7.48494 6.07071L11 9.58579C11.3905 9.97631 11.3905 10.6095 11 11V11C10.6095 11.3905 9.97633 11.3905 9.5858 11L6.07072 7.48492C6.03167 7.44587 5.96836 7.44587 5.9293 7.48492L2.41423 11C2.0237 11.3905 1.39054 11.3905 1.00001 11V11C0.60949 10.6095 0.609489 9.97631 1.00001 9.58579L4.51509 6.07071Z" />
+        </g>
+        <defs>
+          <clipPath id="clip0_11_5">
+            <rect width="12" height="12" />
+          </clipPath>
+        </defs>
+      </svg>
+    </button>
+    <div class="presets-container"></div>
   </div>
 
   <a class="mode-switch" href="jtc.html" role="button">Switch mode</a>
@@ -23,14 +43,26 @@
 bob,42,https://i.pravatar.cc/256,true,142819
 dave,11,https://i.pravatar.cc/300,false,
 john,unknown,https://i.pravatar.cc/256,,</textarea>
-    <label for="input-transformer">Array transformer body (JS code)</label>
-    <textarea name="input-transformer" id="input-transformer" cols="30" rows="10" placeholder="return data.markers;">data.push({
-  name: 'mike',
-  age: 32,
-  employed: false
-});
-
-return { data };</textarea>
+    <div class="transformer-header">
+      <label for="input-transformer">Array transformer body (JS code)</label>
+      <button class="open-presets">
+        <svg width="20" height="22" viewBox="0 0 20 22" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4 0H16C18.2091 0 20 1.79086 20 4V18C20 20.2091 18.2091 22 16 22H4C1.79086 22 0 20.2091 0 18V4C0 1.79086 1.79086 0 4 0ZM4 2C2.89543 2 2 2.89543 2 4V18C2 19.1046 2.89543 20 4 20H16C17.1046 20 18 19.1046 18 18V4C18 2.89543 17.1046 2 16 2H4Z" />
+          <path
+            d="M4 5C4 4.44772 4.44772 4 5 4H9C9.55228 4 10 4.44772 10 5C10 5.55228 9.55228 6 9 6H5C4.44772 6 4 5.55228 4 5Z" />
+          <path
+            d="M4 9C4 8.44772 4.44772 8 5 8H15C15.5523 8 16 8.44772 16 9C16 9.55228 15.5523 10 15 10H5C4.44772 10 4 9.55228 4 9Z" />
+          <path
+            d="M4 13C4 12.4477 4.44772 12 5 12H15C15.5523 12 16 12.4477 16 13C16 13.5523 15.5523 14 15 14H5C4.44772 14 4 13.5523 4 13Z" />
+          <path
+            d="M4 17C4 16.4477 4.44772 16 5 16H13C13.5523 16 14 16.4477 14 17C14 17.5523 13.5523 18 13 18H5C4.44772 18 4 17.5523 4 17Z" />
+        </svg>
+        Presets
+      </button>
+    </div>
+    <textarea name="input-transformer" id="input-transformer" cols="30" rows="10"
+      placeholder="return data.markers;"></textarea>
     <button id="button-transform">Convert CSV to array and transform it</button>
   </div>
   <div class="output-area area">

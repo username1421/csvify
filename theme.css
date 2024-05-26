@@ -1,0 +1,124 @@
+html {
+  --color-main: hsl(0, 0%, 50%);
+
+  --color-0: hsl(from var(--color-main) calc(h + 32) calc(s + 0.2) 99.99);
+  --color-1: hsl(from var(--color-main) calc(h + 24) calc(s + 0.15) 88.88);
+  --color-2: hsl(from var(--color-main) calc(h + 16) calc(s + 0.1) 77.77);
+  --color-3: hsl(from var(--color-main) calc(h + 8) calc(s + 0.05) 66.66);
+  --color-4: hsl(from var(--color-main) calc(h + 0) calc(s + 0) 55.55);
+  --color-5: hsl(from var(--color-main) calc(h - 8) calc(s - 0.05) 44.44);
+  --color-6: hsl(from var(--color-main) calc(h - 16) calc(s - 0.1) 33.33);
+  --color-7: hsl(from var(--color-main) calc(h - 24) calc(s - 0.15) 22.22);
+  --color-8: hsl(from var(--color-main) calc(h - 32) calc(s - 0.2) 11.11);
+  --color-9: hsl(from var(--color-main) calc(h - 40) calc(s - 0.25) 0);
+}
+
+html[data-theme-tone="peach"] {
+  --color-main: hsl(300, 50%, 50%);
+}
+
+html[data-theme-tone="peach"] {
+  --color-main: hsl(10, 50%, 50%);
+}
+
+html[data-theme-tone="plum"] {
+  --color-main: hsl(240, 50%, 50%);
+}
+
+html[data-theme-mapping="dark"] {
+  --color-0: hsl(from var(--color-main) calc(h - 40) calc(s - 0.25) 0);
+  --color-1: hsl(from var(--color-main) calc(h - 32) calc(s - 0.2) 11.11);
+  --color-2: hsl(from var(--color-main) calc(h - 24) calc(s - 0.15) 22.22);
+  --color-3: hsl(from var(--color-main) calc(h - 16) calc(s - 0.1) 33.33);
+  --color-4: hsl(from var(--color-main) calc(h - 8) calc(s - 0.05) 44.44);
+  --color-5: hsl(from var(--color-main) calc(h + 0) calc(s + 0) 55.55);
+  --color-6: hsl(from var(--color-main) calc(h + 8) calc(s + 0.05) 66.66);
+  --color-7: hsl(from var(--color-main) calc(h + 16) calc(s + 0.1) 77.77);
+  --color-8: hsl(from var(--color-main) calc(h + 24) calc(s + 0.15) 88.88);
+  --color-9: hsl(from var(--color-main) calc(h + 32) calc(s + 0.2) 99.99);
+}
+
+html[data-theme-mapping="light"] {
+  --color-0: hsl(from var(--color-main) calc(h + 32) calc(s + 0.2) 95);
+  --color-1: hsl(from var(--color-main) calc(h + 24) calc(s + 0.15) 85);
+  --color-2: hsl(from var(--color-main) calc(h + 16) calc(s + 0.1) 75);
+  --color-3: hsl(from var(--color-main) calc(h + 8) calc(s + 0.05) 65);
+  --color-4: hsl(from var(--color-main) calc(h + 0) calc(s + 0) 55);
+  --color-5: hsl(from var(--color-main) calc(h - 8) calc(s - 0.05) 45);
+  --color-6: hsl(from var(--color-main) calc(h - 16) calc(s - 0.1) 35);
+  --color-7: hsl(from var(--color-main) calc(h - 24) calc(s - 0.15) 25);
+  --color-8: hsl(from var(--color-main) calc(h - 32) calc(s - 0.2) 15);
+  --color-9: hsl(from var(--color-main) calc(h - 40) calc(s - 0.25) 5);
+}
+
+html[data-theme-mapping="custom"] {
+  --color-0: hsl(from var(--color-main) calc(h + 32) calc(s + 0.2) 95);
+  --color-1: hsl(from var(--color-main) calc(h + 24) calc(s + 0.15) 85);
+  --color-2: hsl(from var(--color-main) calc(h + 16) calc(s + 0.1) 75);
+  --color-3: hsl(from var(--color-main) calc(h + 8) calc(s + 0.05) 65);
+  --color-4: hsl(from var(--color-main) calc(h + 0) calc(s + 0) 55);
+  --color-5: hsl(from var(--color-main) calc(h - 8) calc(s - 0.05) 45);
+  --color-6: hsl(from var(--color-main) calc(h - 16) calc(s - 0.1) 35);
+  --color-7: hsl(from var(--color-main) calc(h - 24) calc(s - 0.15) 25);
+  --color-8: hsl(from var(--color-main) calc(h - 32) calc(s - 0.2) 15);
+  --color-9: hsl(from var(--color-main) calc(h - 40) calc(s - 0.25) 5);
+}
+
+html {
+  --color-body-bg: var(--color-0);
+  --color-body-fg: var(--color-9);
+
+  --color-modal-backdrop-bg: hsla(from var(--color-body-bg) h s 5 / 0.9);
+  --color-code-bg: var(--color-0);
+  --color-code-fg: var(--color-8);
+
+  --color-splash-bg: var(--color-2);
+  --color-splash-fg: var(--color-7);
+
+  /* focus outline color */
+  --color-focus: var(--color-5);
+
+  /* input colors */
+  --color-input-bg: var(--color-1);
+  --color-input-fg: var(--color-8);
+  --color-input-bg-focus: var(--color-2);
+  --color-input-fg-focus: var(--color-8);
+  --color-input-bg-hover: var(--color-2);
+  --color-input-fg-hover: var(--color-8);
+  --color-input-bg-active: var(--color-0);
+  --color-input-fg-active: var(--color-9);
+
+  /* input scrollbar colors */
+  --color-input-scroll-track-bg: var(--color-input-bg);
+  --color-input-scroll-track-fg: var(--color-input-bg);
+  --color-input-focus-scroll-track-bg: var(--color-3);
+  --color-input-focus-scroll-track-fg: var(--color-3);
+
+  --color-input-scroll-thumb-bg: var(--color-6);
+  --color-input-scroll-thumb-fg: var(--color-input-scroll-track-bg);
+  --color-input-focus-scroll-thumb-bg: var(--color-8);
+  --color-input-focus-scroll-thumb-fg: var(--color-input-focus-scroll-track-bg);
+
+  /* button colors */
+  --color-btn-bg: var(--color-3);
+  --color-btn-fg: var(--color-9);
+  --color-btn-bg-hover: var(--color-2);
+  --color-btn-fg-hover: var(--color-8);
+  --color-btn-bg-active: var(--color-9);
+  --color-btn-fg-active: var(--color-0);
+  --color-btn-bg-disabled: hsl(from var(--color-3) h 0 l);
+  --color-btn-fg-disabled: hsl(from var(--color-9) h 0 l);
+
+  /* padding levels */
+
+  --pad-0: 50px;
+  --pad-1: 20px;
+  --pad-2: 10px;
+
+  /* border-radius levels */
+
+  --br-0: 50px;
+  --br-1: 20px;
+  --br-2: 10px;
+  --br-3: 9px;
+}

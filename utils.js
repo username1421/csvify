@@ -6,11 +6,11 @@ import {
   DOUBLE_QUOTES_ENCLOSED_REGEX,
   CRLF,
   LF,
-  CR
+  CR,
 } from "./constants.js";
 
 function parseCsvLine(line) {
-  let char = '';
+  let char = "";
   let result = [];
   let field = [];
   let quoteSeries = [];
@@ -24,10 +24,10 @@ function parseCsvLine(line) {
         if (char !== CR && char !== LF) {
           field.push(char);
         }
-        result.push(field.join(''));
+        result.push(field.join(""));
       } else {
-        result.push(field.join(''));
-        result.push('');
+        result.push(field.join(""));
+        result.push("");
       }
 
       continue;
@@ -46,15 +46,18 @@ function parseCsvLine(line) {
         if (!inEnclosedField && char !== COMMA) {
           return {
             ok: false,
-            payload: `Quotes escaping error at index ${i}.\nHere's a slice of 20 closest characters ${line.slice(Math.max(0, i - 10), Math.min(i + 10, line.length - 1))}`
-          }
+            payload: `Quotes escaping error at index ${i}.\nHere's a slice of 20 closest characters ${line.slice(
+              Math.max(0, i - 10),
+              Math.min(i + 10, line.length - 1)
+            )}`,
+          };
         }
 
-        field.push(quoteSeries.join(''));
+        field.push(quoteSeries.join(""));
         quoteSeries = [];
 
         if (!inEnclosedField) {
-          result.push(field.join(''));
+          result.push(field.join(""));
           field = [];
 
           continue;
@@ -67,7 +70,7 @@ function parseCsvLine(line) {
     }
 
     if (char === COMMA) {
-      result.push(field.join(''));
+      result.push(field.join(""));
       field = [];
 
       continue;
@@ -76,8 +79,11 @@ function parseCsvLine(line) {
     if ((char === CR || char === LF) && i < line.length - 1) {
       return {
         ok: false,
-        payload: `CRLF error at index ${i}.\nHere's a slice of 20 closest characters ${line.slice(Math.max(0, i - 10), Math.min(i + 10, line.length - 1))}`
-      }
+        payload: `CRLF error at index ${i}.\nHere's a slice of 20 closest characters ${line.slice(
+          Math.max(0, i - 10),
+          Math.min(i + 10, line.length - 1)
+        )}`,
+      };
     }
 
     inEnclosedField = char === DOUBLE_QUOTE;
@@ -86,7 +92,7 @@ function parseCsvLine(line) {
 
   return {
     ok: true,
-    payload: result
+    payload: result,
   };
 }
 
@@ -108,7 +114,11 @@ export function toArray(csvStr) {
     const values = parseCsvLine(line).payload;
 
     if (values.length !== keys.length) {
-      console.error(`Count of values in the line #${i} conflicts with CSV header!`, keys, values);
+      console.error(
+        `Count of values in the line #${i} conflicts with CSV header!`,
+        keys,
+        values
+      );
       continue;
     }
 
@@ -148,17 +158,17 @@ function canBeCSVified(item) {
 const data = {
   keys: [],
   result: [],
-  line: []
+  line: [],
 };
 
 function pushToLine(elem) {
-  if (typeof elem === 'string') {
+  if (typeof elem === "string") {
     data.line.push(csvifyStr(elem));
     return;
   }
 
   data.line.push(elem);
-};
+}
 
 export function toCSV(arr = []) {
   if (!Array.isArray(arr) || arr.length === 0) {
@@ -172,7 +182,7 @@ export function toCSV(arr = []) {
   for (let i = 0; i < arr.length; i++) {
     const elem = arr[i];
 
-    if (typeof elem !== 'object' || elem === null) {
+    if (typeof elem !== "object" || elem === null) {
       continue;
     }
 
@@ -187,7 +197,7 @@ export function toCSV(arr = []) {
         }
       }
     } else {
-      data.keys.forEach(key => {
+      data.keys.forEach((key) => {
         if (canBeCSVified(elem[key])) {
           pushToLine(elem[key]);
         } else {
@@ -209,20 +219,20 @@ export function init(nodes) {
     if (!nodes[key].node) {
       return {
         ok: false,
-        payload: `Failed to find ${nodes[key].selector} node`
-      }
+        payload: `Failed to find ${nodes[key].selector} node`,
+      };
     }
   }
 
   return {
     ok: true,
-    payload: undefined
-  }
+    payload: undefined,
+  };
 }
 
-export function downloadBlob(blob, filename = 'data.csv') {
+export function downloadBlob(blob, filename = "data.csv") {
   const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
 
   a.href = url;
   a.download = filename;
@@ -230,56 +240,71 @@ export function downloadBlob(blob, filename = 'data.csv') {
   window.URL.revokeObjectURL(url);
 }
 
-export function tryBase(callback, check = () => true, checkFailPayload = '') {
+export function tryBase(callback, check = () => true, checkFailPayload = "") {
   try {
     const result = callback();
 
     if (!check(result)) {
       return {
         ok: false,
-        payload: checkFailPayload
-      }
+        payload: checkFailPayload,
+      };
     }
 
     return {
       ok: true,
-      payload: result
-    }
+      payload: result,
+    };
   } catch (error) {
     console.error(error);
 
     return {
       ok: false,
-      payload: error
-    }
+      payload: error,
+    };
   }
 }
 
-export function hideSplash(afterHid = () => { }) {
-  const splash = document.querySelector('.splash');
+export function hideSplash(afterHid = () => {}) {
+  const splash = document.querySelector(".splash");
 
   if (!splash) {
     return;
   }
 
-  splash.style.transform = "translateY(-100%)"
-  splash.addEventListener('transitionend', afterHid);
+  splash.style.transform = "translateY(-100%)";
+  splash.addEventListener("transitionend", afterHid);
 }
 
-export function showSplash(afterShowed = () => { }) {
-  const splash = document.querySelector('.splash');
+export function showSplash(afterShowed = () => {}) {
+  const splash = document.querySelector(".splash");
 
   if (!splash) {
     return;
   }
 
-  splash.style.transform = "translateY(0%)"
-  splash.addEventListener('transitionend', afterShowed);
+  splash.style.transform = "translateY(0%)";
+  splash.addEventListener("transitionend", afterShowed);
 }
 
-export function switchMode(e) {
+export function transitionRedirect(e) {
   e.preventDefault();
   showSplash(() => {
-    location.href = e.target.href;
+    location.href = e.target.closest("a[href]").href;
   });
+}
+
+export function getFunctionBodyString(func) {
+  try {
+    const funcStr = func.toString();
+    const funcBodyStr = funcStr.slice(
+      funcStr.indexOf("{") + 1,
+      funcStr.lastIndexOf("}")
+    );
+
+    return funcBodyStr.trim();
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }
