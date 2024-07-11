@@ -41,10 +41,32 @@ function getGoogleMapsMarkers(data) {
   return markers;
 }
 
+function getRestaurantMenuItems(data) {
+  return data.menus.flatMap((menu) => {
+    const menuName = menu.name;
+
+    return menu.items.map((item) => {
+      const { name: itemName, description: itemDescription, price: itemPrice } = item;
+
+      return {
+        menuName,
+        itemName,
+        itemDescription,
+        itemPrice
+      };
+    });
+  });
+}
+
 window.presets = [
   {
     name: "Google Maps: выгрузить локации",
     description: "Достаёт и очищает локации из конфига Google Maps",
     code: getFunctionBodyString(getGoogleMapsMarkers),
   },
+  {
+    name: "Restaurant Menu: выгрузить блюда",
+    description: "Достаёт из конфига RM блюда в формате: { <имя_меню_блюда>, <имя_блюда>, <описание_блюда>, <цена_блюда> }",
+    code: getFunctionBodyString(getRestaurantMenuItems)
+  }
 ];
