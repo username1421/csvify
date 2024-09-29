@@ -193,7 +193,7 @@ body::-webkit-scrollbar-track {
   right: var(--pad-2);
   padding: var(--pad-2) !important;
 
-  width: 150px;
+  width: 200px;
 
   position: fixed;
 
