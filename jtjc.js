@@ -5,6 +5,7 @@ import {
     transitionRedirect,
     toCSV,
     tryBase,
+    toast,
   } from "./utils.js";
   
   const nodes = {
@@ -95,6 +96,11 @@ import {
   
     const jsonOutput = transformerResult.payload[0];
     const csvOutput = transformerResult.payload[1];
+    const toastMessage = transformerResult.payload[2];
+
+    if (toastMessage) {
+      toast(toastMessage);
+    }
 
     trySetJsonOutput(jsonOutput);
     state.csv = toCSV(csvOutput).toWellFormed();

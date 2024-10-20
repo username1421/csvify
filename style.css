@@ -253,7 +253,8 @@ button:active svg {
   display: none;
 }
 
-.modal button.close {
+.modal button.close,
+.theme-selector button.close {
   top: var(--pad-2);
   right: var(--pad-2);
   padding: var(--pad-2);
@@ -338,4 +339,42 @@ button:active svg {
   white-space: pre;
 
   overflow-x: auto;
+}
+
+.toast {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%) translateY(0px);
+  opacity: 0;
+  top: 10px;
+
+  padding: var(--pad-1);
+  border-radius: var(--br-1);
+
+  color: var(--color-9);
+
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+.toast.appear {
+  transform: translateX(-50%) translateY(10px);
+  opacity: 1;
+}
+
+.toast.disappear {
+  transform: translateX(-50%) translateY(-10px);
+  opacity: 0;
+}
+
+.toast[data-toast-type="info"] {
+  background-color: var(--toast-info);
+}
+
+.toast[data-toast-type="warning"] {
+  background-color: var(--toast-warning);
+}
+
+.toast[data-toast-type="error"] {
+  background-color: var(--toast-error);
 }

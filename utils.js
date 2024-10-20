@@ -119,6 +119,12 @@ export function toArray(csvStr) {
         keys,
         values
       );
+
+      toast({
+        message: `Count of values in the line #${i} conflicts with CSV header!`,
+        type: ToastType.Error,
+      });
+
       continue;
     }
 
@@ -258,6 +264,11 @@ export function tryBase(callback, check = () => true, checkFailPayload = "") {
   } catch (error) {
     console.error(error);
 
+    toast({
+      message: error,
+      type: ToastType.Error,
+    });
+
     return {
       ok: false,
       payload: error,
@@ -305,6 +316,44 @@ export function getFunctionBodyString(func) {
     return funcBodyStr.trim();
   } catch (error) {
     console.error(error);
+
+    toast({
+      message: error,
+      type: ToastType.Error,
+    });
+
     return;
   }
+}
+
+const ToastType = {
+  Info: "info",
+  Warning: "warning",
+  Error: "error",
+};
+
+export function toast({ message = "", type = ToastType.Info }) {
+  if (message === "") {
+    return;
+  }
+
+  const toastElem = document.createElement("div");
+
+  toastElem.classList.add("toast");
+  toastElem.dataset.toastType = type;
+  toastElem.textContent = message;
+
+  document.body.appendChild(toastElem);
+
+  const lifetime = Math.max(2000, message.length * 100);
+
+  requestAnimationFrame(() => toastElem.classList.add("appear"));
+
+  setTimeout(() => {
+    toastElem.classList.toggle("disappear");
+    toastElem.classList.remove("appear");
+    toastElem.addEventListener("transitionend", () => {
+      toastElem.remove();
+    });
+  }, lifetime);
 }

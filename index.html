@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./theme.js"></script>
     <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="index.css" />
@@ -14,6 +15,63 @@
   <body>
     <div class="splash">
       <div class="loader">LOADING</div>
+    </div>
+
+    <button class="open-theme-selector">Theming</button>
+    <div class="theme-selector hidden">
+      <button class="close">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_11_5)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4.51509 6.07071C4.55414 6.03166 4.55414 5.96834 4.51509 5.92929L1.00001 2.41421C0.60949 2.02369 0.60949 1.39052 1.00001 1V1C1.39054 0.609476 2.0237 0.609475 2.41423 0.999999L5.9293 4.51508C5.96836 4.55413 6.03167 4.55413 6.07072 4.51508L9.5858 1C9.97633 0.609476 10.6095 0.609476 11 1V1C11.3905 1.39052 11.3905 2.02369 11 2.41421L7.48494 5.92929C7.44589 5.96834 7.44589 6.03166 7.48494 6.07071L11 9.58579C11.3905 9.97631 11.3905 10.6095 11 11V11C10.6095 11.3905 9.97633 11.3905 9.5858 11L6.07072 7.48492C6.03167 7.44587 5.96836 7.44587 5.9293 7.48492L2.41423 11C2.0237 11.3905 1.39054 11.3905 1.00001 11V11C0.60949 10.6095 0.609489 9.97631 1.00001 9.58579L4.51509 6.07071Z"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_11_5">
+              <rect width="12" height="12" />
+            </clipPath>
+          </defs>
+        </svg>
+      </button>
+      Light / Dark
+      <div class="mapping-selector">
+        <div class="thumb"></div>
+        <div class="track"></div>
+        <svg
+          class="icon sun"
+          width="9"
+          height="9"
+          viewBox="0 0 9 9"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M5.22469 1.79541L4.5 1L3.77531 1.79541L2.75 1.46891L2.5201 2.5201L1.46891 2.75L1.79541 3.77531L1 4.5L1.79541 5.22469L1.46891 6.25L2.5201 6.4799L2.75 7.53109L3.77531 7.20459L4.5 8L5.22469 7.20459L6.25 7.53109L6.4799 6.4799L7.53109 6.25L7.20459 5.22469L8 4.5L7.20459 3.77531L7.53109 2.75L6.4799 2.5201L6.25 1.46891L5.22469 1.79541ZM4.5 6.5C5.60457 6.5 6.5 5.60457 6.5 4.5C6.5 3.39543 5.60457 2.5 4.5 2.5C3.39543 2.5 2.5 3.39543 2.5 4.5C2.5 5.60457 3.39543 6.5 4.5 6.5Z"
+          />
+        </svg>
+
+        <svg
+          class="icon moon"
+          width="9"
+          height="9"
+          viewBox="0 0 9 9"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.76457 5.76456C7.37236 5.9166 6.94592 5.99999 6.5 5.99999C4.567 5.99999 3 4.43298 3 2.49999C3 2.05407 3.08339 1.62763 3.23543 1.23541C1.92742 1.74244 1 3.01291 1 4.49999C1 6.43298 2.567 7.99999 4.5 7.99999C5.98708 7.99999 7.25755 7.07257 7.76457 5.76456Z"
+          />
+        </svg>
+      </div>
+      Tones
+      <div class="tone-selector"></div>
     </div>
 
     <div class="prompt">Select mode</div>
