@@ -170,7 +170,8 @@ export function removeAndExportEvents(data) {
         endDate &&
         compareDates(endDate, DATES_OF_EVENTS_TO_DELETE.until) === -1;
 
-      const shouldRemove = startRes && endRes;
+      const doesRepeat = event?.repeatPeriod !== 'noRepeat';
+      const shouldRemove = !doesRepeat && startRes && endRes;
 
       if (shouldRemove) {
         rejectedEvents.push(event);

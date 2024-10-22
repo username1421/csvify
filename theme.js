@@ -66,7 +66,6 @@ function setThemeTone(toneValue) {
 function createToneSelectorElement(toneValue, toneColor) {
   const toneElem = document.createElement("div");
   const toneIndicatorElem = document.createElement("div");
-  const toneLabelElem = document.createElement("div");
 
   toneElem.classList.add("tone-entry");
   toneElem.dataset[THEME_TONE_ATTRIBUTE] = toneValue;
@@ -74,11 +73,7 @@ function createToneSelectorElement(toneValue, toneColor) {
   toneIndicatorElem.classList.add("tone-indicator");
   toneIndicatorElem.style.backgroundColor = toneColor;
 
-  toneLabelElem.classList.add("tone-label");
-  toneLabelElem.innerText = toneValue;
-
   toneElem.appendChild(toneIndicatorElem);
-  toneElem.appendChild(toneLabelElem);
 
   if (toneValue === document.documentElement.dataset[THEME_TONE_ATTRIBUTE]) {
     toneElem.classList.add("selected");
