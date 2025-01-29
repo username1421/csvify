@@ -305,6 +305,8 @@ export function transitionRedirect(e) {
   });
 }
 
+const shiftTabRegex = /^  /gm;
+
 export function getFunctionBodyString(func) {
   try {
     const funcStr = func.toString();
@@ -313,7 +315,7 @@ export function getFunctionBodyString(func) {
       funcStr.lastIndexOf("}")
     );
 
-    return funcBodyStr.trim();
+    return funcBodyStr.replaceAll(shiftTabRegex, '').trim();
   } catch (error) {
     console.error(error);
 
