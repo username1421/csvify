@@ -13,7 +13,7 @@ function TRANSFORMER_EXAMPLE(data) {
   return data.records;
 }
 
-function getGoogleMapsMarkers(data) {
+function getGMMarkers(data) {
   const markers = data.markers.map(
     ({
       position,
@@ -43,7 +43,7 @@ function getGoogleMapsMarkers(data) {
   return markers;
 }
 
-function getRestaurantMenuItems(data) {
+function getRMItems(data) {
   return data.menus.flatMap((menu) => {
     const menuName = menu.name;
 
@@ -66,9 +66,9 @@ function getRestaurantMenuItems(data) {
 
 function getTSTestimonials(data) {
   function removeHtmlTags(str) {
-    return str?.replace(/<[^>]*>/g, '');
+    return str?.replace(/<[^>]*>/g, "");
   }
-  
+
   function getFormattedTestimonial(itemData) {
     const {
       reviewer_name,
@@ -79,9 +79,9 @@ function getTSTestimonials(data) {
       rating,
       socialProfileUrl,
       websiteUrl,
-      date = {}
+      date = {},
     } = itemData;
-  
+
     return {
       Name: removeHtmlTags(reviewer_name),
       Caption: removeHtmlTags(caption),
@@ -89,13 +89,66 @@ function getTSTestimonials(data) {
       Picture: picture?.url || null,
       Text: removeHtmlTags(text),
       Rating: rating,
-      'Social Profile URL': socialProfileUrl,
+      "Social Profile URL": socialProfileUrl,
       Website: websiteUrl,
-      Logo: logo?.url || null
+      Logo: logo?.url || null,
     };
   }
-  
+
   return data.items.map(getFormattedTestimonial);
+}
+
+function getECEvents(data) {
+  const findById = (src = [], id = "") =>
+    src.find(({ id: itemId }) => id === itemId);
+
+  const { events, hosts, locations, eventTypes } = data;
+
+  return events.map((event) => {
+    const {
+      name,
+      start,
+      end,
+      timeZone,
+      description,
+      image,
+      eventType: eventTypeId,
+      location: locationId,
+      host: hostId,
+      repeatPeriod,
+      repeatFrequency,
+      repeatInterval,
+      repeatEnds,
+      repeatEndsDate,
+      repeatEndsOccurrences,
+      repeatMonthlyOnDay,
+    } = event;
+
+    const eventTypeName = findById(eventTypes, eventTypeId)?.name ?? "";
+    const { name: locationName, address: locationAddress } =
+      findById(locations, locationId) ?? {};
+    const hostName = findById(hosts, hostId)?.name ?? "";
+
+    return {
+      name,
+      description,
+      imageUrl: image?.url ?? "",
+      timeZone,
+      startDatetime: `${start.date} ${start.time}`,
+      endDatetime: `${end.date} ${end.time}`,
+      repeatPeriod,
+      repeatFrequency,
+      repeatInterval,
+      repeatEnds,
+      repeatEndsDate,
+      repeatEndsOccurrences,
+      repeatMonthlyOnDay,
+      eventTypeName,
+      locationName,
+      locationAddress,
+      hostName,
+    };
+  });
 }
 
 window.presets = [
@@ -103,18 +156,21 @@ window.presets = [
     name: "Google Maps: выгрузить локации",
     description:
       "Выгружает из локации из конфига Google Maps в формате, который может быть импортирован в виджет",
-    code: getFunctionBodyString(getGoogleMapsMarkers),
+    code: getFunctionBodyString(getGMMarkers),
   },
   {
     name: "Restaurant Menu: выгрузить блюда",
-    description:
-      "Выгружает из конфига RM блюда в формате: { <имя_меню_блюда>, <имя_блюда>, <описание_блюда>, <цена_блюда> }",
-    code: getFunctionBodyString(getRestaurantMenuItems),
+    description: "Выгружает блюда из конфига RM",
+    code: getFunctionBodyString(getRMItems),
   },
   {
     name: "Testimonials Slider: выгрузить отзывы",
-    description:
-      "Выгружает из конфига TS отзывы в формате: { <имя>, <подпись>, <дата>, <ссылка_на_изображение_профиля>, <текст_отзыва>, <рейтинг>, <ссылка_на_профиль_в_соцсети>, <ссылка_на_вебсайт>, <ссылка_на_изображение_логотипа> }",
+    description: "Выгружает отзывы из конфига TS",
     code: getFunctionBodyString(getTSTestimonials),
+  },
+  {
+    name: "Event Calendar: выгрузить события",
+    description: "Выгружает события из конфига EC",
+    code: getFunctionBodyString(getECEvents),
   },
 ];
