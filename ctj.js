@@ -36,6 +36,10 @@ const nodes = {
     selector: ".mode-switch",
     node: undefined,
   },
+  filenameInput: {
+    selector: "#filename",
+    node: undefined,
+  },
 };
 
 const state = {
@@ -97,9 +101,11 @@ function download() {
     return;
   }
 
+  const filename = (nodes.filenameInput.node?.value ?? "data") + ".json";
+
   downloadBlob(
     new Blob([state.jsonStr], { type: "application/json" }),
-    "data.json"
+    filename
   );
 }
 

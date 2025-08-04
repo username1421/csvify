@@ -36,6 +36,10 @@ const nodes = {
     selector: ".mode-switch",
     node: undefined,
   },
+  filenameInput: {
+    selector: "#filename",
+    node: undefined,
+  },
 };
 
 const state = {
@@ -103,7 +107,9 @@ function download() {
     return;
   }
 
-  downloadBlob(new Blob([state.csv], { type: "text/csv" }), "data.csv");
+  const filename = (nodes.filenameInput.node?.value ?? "data") + ".csv";
+
+  downloadBlob(new Blob([state.csv], { type: "text/csv" }), filename);
 }
 
 if (init(nodes).ok) {

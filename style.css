@@ -73,7 +73,7 @@ body {
   flex: 1;
 }
 
-textarea {
+textarea, input {
   background-color: var(--color-input-bg);
   color: var(--color-input-fg);
 
@@ -94,7 +94,7 @@ textarea {
   resize: none;
 }
 
-textarea:focus {
+textarea:focus, input:focus {
   background-color: var(--color-input-bg-focus);
   color: var(--color-input-fg-focus);
   outline: 3px solid var(--color-focus);
@@ -377,4 +377,20 @@ button:active svg {
 
 .toast[data-toast-type="error"] {
   background-color: var(--toast-error);
+}
+
+#filename {
+  flex: 1;
+}
+
+input::placeholder {
+  color: var(--color-input-fg);
+  opacity: .5;
+}
+
+.download-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex: 1;
 }
