@@ -315,7 +315,7 @@ export function getFunctionBodyString(func) {
       funcStr.lastIndexOf("}")
     );
 
-    return funcBodyStr.replaceAll(shiftTabRegex, '').trim();
+    return funcBodyStr.replaceAll(shiftTabRegex, "").trim();
   } catch (error) {
     console.error(error);
 
@@ -358,4 +358,18 @@ export function toast({ message = "", type = ToastType.Info }) {
       toastElem.remove();
     });
   }, lifetime);
+}
+
+export function processFilename(
+  rawFilename = "",
+  fallbackFilename = "data",
+  extension = "csv"
+) {
+  if (!rawFilename.length) {
+    return fallbackFilename;
+  }
+
+  return (
+    rawFilename.trim().toLowerCase().replaceAll(" ", "_") + "." + extension
+  );
 }

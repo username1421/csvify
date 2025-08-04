@@ -5,6 +5,7 @@ import {
   transitionRedirect,
   toCSV,
   tryBase,
+  processFilename,
 } from "./utils.js";
 
 const nodes = {
@@ -107,7 +108,11 @@ function download() {
     return;
   }
 
-  const filename = (nodes.filenameInput.node?.value ?? "data") + ".csv";
+  const filename = processFilename(
+    nodes.filenameInput.node?.value,
+    "data",
+    "csv"
+  );
 
   downloadBlob(new Blob([state.csv], { type: "text/csv" }), filename);
 }

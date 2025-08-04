@@ -5,6 +5,7 @@ import {
   transitionRedirect,
   toArray,
   tryBase,
+  processFilename,
 } from "./utils.js";
 
 const nodes = {
@@ -101,7 +102,11 @@ function download() {
     return;
   }
 
-  const filename = (nodes.filenameInput.node?.value ?? "data") + ".json";
+  const filename = processFilename(
+    nodes.filenameInput.node?.value,
+    "data",
+    "json"
+  );
 
   downloadBlob(
     new Blob([state.jsonStr], { type: "application/json" }),
