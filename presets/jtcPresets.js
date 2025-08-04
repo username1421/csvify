@@ -151,6 +151,30 @@ function getECEvents(data) {
   });
 }
 
+function getFAQQnAs(data) {
+  if (!data?.categories?.length) {
+    return [];
+  }
+
+  return data.categories.reduce((acc, category) => {
+    if (!category?.items?.length) {
+      return acc;
+    }
+
+    let categoryName = category.name?.trim();
+
+    if (!categoryName) {
+      categoryName = "NONAME";
+    }
+
+    category.items.forEach(({ question, answer }) => {
+      acc.push({ category: categoryName, question, answer });
+    });
+
+    return acc;
+  }, []);
+}
+
 window.presets = [
   {
     name: "Google Maps: выгрузить локации",
@@ -172,5 +196,10 @@ window.presets = [
     name: "Event Calendar: выгрузить события",
     description: "Выгружает события из конфига EC",
     code: getFunctionBodyString(getECEvents),
+  },
+  {
+    name: "FAQ: выгрузить вопросы с ответами",
+    description: "Выгружает вопросы, ответы и их категории из конфига FAQ",
+    code: getFunctionBodyString(getFAQQnAs),
   },
 ];
